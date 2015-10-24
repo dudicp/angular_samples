@@ -1,0 +1,37 @@
+<div>
+  <h2>{{user.name}}</h2>
+  {{ error_message }}
+  <img ng-src="http://www.gravatar.com/avatar/{{user.gravatar_id}}" title="{{user.name}}" />
+
+  <br/>
+  <br/>Order:
+  
+  <!-- select combo box will set the value into the repoSortOrder variable -->
+  <select ng-model="repoSortOrder">
+    <option value="+name">Name</option>
+    <option value="-stargazers_count">Stars</option>
+    <option value="+language">Language</option>
+  </select>
+
+  <br/>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Stars</th>
+      <th>Language</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="repo in repos | orderBy:repoSortOrder">
+      <td>
+        <a href="#/repo/{{user.login}}/{{repo.name}}">{{repo.name}}</a>
+      </td>
+      <td>{{repo.stargazers_count | number }}</td>
+      <td>{{repo.language}}</td>
+    </tr>
+  </tbody>
+</table>
+<a href="#/main">Back to search</a> <!-- will use routing to back the the MainController -->
